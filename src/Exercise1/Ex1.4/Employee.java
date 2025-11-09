@@ -10,34 +10,42 @@ public class Employee {
         this.lastName = lastName;
         this.salary = salary;
     }
+
     public int getId() {
         return id;
     }
+
     public String getFirstName() {
         return firstName;
     }
+
     public String getLastName() {
         return lastName;
     }
-    String getName() {
+
+    public String getName() {
         return firstName + " " + lastName;
     }
+
     public int getSalary() {
         return salary;
     }
+
     public void setSalary(int salary) {
         this.salary = salary;
     }
+
     public int getAnnualSalary() {
-        int annualSalary = salary*12;
-        return annualSalary;
-    }
-    public int raiseSalary(int percent) {
-        int annualSalary = salary*percent;
-        return annualSalary;
-    }
-    public String toString() {
-        return   id + ", name=" + getName() + ", salary=" + salary + "]";
+        return salary * 12;
     }
 
+    public int raiseSalary(int percent) {
+        salary += salary * percent / 100;
+        return salary;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee[id=" + id + ",name=" + getName() + ",salary=" + salary + "]";
+    }
 }

@@ -1,18 +1,17 @@
 public class Account {
     private String id;
     private String name;
-    private int balance;
+    private int balance = 0;
 
     public Account(String id, String name) {
         this.id = id;
         this.name = name;
-        this.balance = 0;
     }
 
     public Account(String id, String name, int balance) {
+        this.balance = balance;
         this.id = id;
         this.name = name;
-        this.balance = balance;
     }
 
     public String getId() {
@@ -28,30 +27,33 @@ public class Account {
     }
 
     public int credit(int amount) {
-        balance = balance + amount;
+        balance += amount;
         return balance;
     }
 
     public int debit(int amount) {
-        if (amount <= balance) {
-            balance = balance - amount;
-        } else {
-            System.out.println("Amount exceeded balance");
-        }
+    if (balance >= amount) {
+        balance -= amount;
         return balance;
     }
-
-    public int transferTo(Account another, int amount) {
-        if (amount <= balance) {
-            this.balance = balance - amount;
-            another.credit(amount);
-        } else {
-            System.out.println("Amount exceeded balance");
-        }
-        return balance;
+    else {
+        return 0;
+    }
     }
 
+    public int transfer(int amount, Account another) {
+        if (balance >= amount) {
+            balance -= amount;
+            another.balance += amount;
+            return balance;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    @Override
     public String toString() {
-        return "Account[id=" + id + ",name=" + name + ",balance=" + balance + "]";
+        return "Account[" + "id='" + id + '\'' + ", name='" + name + '\'' + ", balance=" + balance + ']';
     }
 }
